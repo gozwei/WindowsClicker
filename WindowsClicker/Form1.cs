@@ -48,39 +48,79 @@ namespace WindowsClicker
             mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        public static void MoveMouse(int x, int y)
         {
-            if (checkBox1.Checked)
+            // Setting cursor at position x, y
+            Cursor.Position = new System.Drawing.Point(x, y);
+        }
+
+        private DateTime LastChange;
+
+        private int offsetX = 0;
+        private int offsetY = 0;
+
+        private int directionX = 1;
+        private int directionY = 1;
+
+        private int lastUserX = 0;
+        private int lastUserY = 0;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            int X = Cursor.Position.X;
+            int Y = Cursor.Position.Y;
+
+            int lastX = Int32.Parse(textBox2.Text);
+            int lastY = Int32.Parse(textBox3.Text);
+
+            if ((X != lastX) | (Y != lastY))
             {
-                int sleeptime = Int32.Parse(textBox1.Text);
+                LastChange = DateTime.UtcNow;
+                lastUserX = X;
+                lastUserY = Y;
+            }
 
-                while (true)
+
+            textBox2.Text = X.ToString();
+            textBox3.Text = Y.ToString();
+
+            double secondsSinceMovement = (DateTime.UtcNow - LastChange).TotalSeconds;
+
+            textBox4.Text = secondsSinceMovement.ToString();
+
+            if (secondsSinceMovement > 10)
+            {
+                int newX;
+                int newY;
+
+                offsetX += 1 * directionX;
+                offsetY += 1 * directionY;
+
+                if (Math.Abs(offsetX) > 10)
                 {
-                    Application.DoEvents();
-                    for (int i = 0; i < sleeptime; i++)
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                        if (!checkBox1.Checked)
-                        {
-                            return;
-                        }
-                        Application.DoEvents();
-                        if (!checkBox1.Checked)
-                        {
-                            return;
-                        }
-                    }
-
-                    Application.DoEvents();
-                    if (!checkBox1.Checked)
-                    {
-                        return;
-                    }
-
-                    int X = Cursor.Position.X;
-                    int Y = Cursor.Position.Y;
-                    LeftClick(X, Y);
+                    directionX *= -1;
                 }
+                if (Math.Abs(offsetY) > 10)
+                {
+                    directionY *= -1;
+                }
+
+                var directions = new List<int> {-1, 1};
+                var random = new Random();
+                if ((offsetX == 0) & (offsetY == 0))
+                {
+                    directionX = directions[random.Next(directions.Count)];
+                    directionY = directions[random.Next(directions.Count)];
+                }
+
+                newX = lastUserX + offsetX;
+                newY = lastUserY + offsetY;
+
+                textBox2.Text = newX.ToString();
+                textBox3.Text = newY.ToString();
+
+                MoveMouse(newX, newY);
             }
         }
     }
