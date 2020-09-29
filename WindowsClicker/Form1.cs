@@ -12,13 +12,13 @@ namespace WindowsClicker
 {
     public partial class Form1 : Form
     {
-        // Ładujemy bibliotekę user32.dll
+        // Loading user32.dll library:
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
 
-        // Będziemy korzystać z funkcji mouse_event z załadownej biblioteki
+        // The function we are going to use: mouse_event
         public static extern void mouse_event(long dwFlags, long dx, long dy, long cButtons, long dwExtraInfo);
 
-        // Będziemy potrzebować kody różnych zdarzeń związnych z myszką
+        // Mouse action codes:
         public enum MouseEventFlags
         {
             LEFTDOWN = 0x00000002,
@@ -31,24 +31,20 @@ namespace WindowsClicker
             RIGHTUP = 0x00000010
         }
 
-
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public static void LeftClick(int x, int y)
         {
-            // Ustawiamy kursor w punkcie x, y
+            // Setting cursor at position x, y
             Cursor.Position = new System.Drawing.Point(x, y);
-            // Symulujemy wcisnięcie lewego przycisku myszy
+
+            // Simulating left click down (and hold)
             mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
-            // Symulujemy puszczenie lewego przycisku myszy
+
+            // Simulating left click release
             mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
