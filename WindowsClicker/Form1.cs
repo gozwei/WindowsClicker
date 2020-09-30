@@ -65,6 +65,8 @@ namespace WindowsClicker
         private int lastUserX = 0;
         private int lastUserY = 0;
 
+        private int clicksIntrval = 100;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             
@@ -77,6 +79,7 @@ namespace WindowsClicker
             if ((X != lastX) | (Y != lastY))
             {
                 LastChange = DateTime.UtcNow;
+                clicksIntrval = 100;
                 lastUserX = X;
                 lastUserY = Y;
             }
@@ -84,6 +87,7 @@ namespace WindowsClicker
 
             textBox2.Text = X.ToString();
             textBox3.Text = Y.ToString();
+            textBox1.Text = clicksIntrval.ToString();
 
             double secondsSinceMovement = (DateTime.UtcNow - LastChange).TotalSeconds;
 
@@ -91,36 +95,50 @@ namespace WindowsClicker
 
             if (secondsSinceMovement > 10)
             {
-                int newX;
-                int newY;
-
-                offsetX += 1 * directionX;
-                offsetY += 1 * directionY;
-
-                if (Math.Abs(offsetX) > 10)
+                if (checkMoveMouse.Checked)
                 {
-                    directionX *= -1;
+                    int newX;
+                    int newY;
+
+                    offsetX += 1 * directionX;
+                    offsetY += 1 * directionY;
+
+                    if (Math.Abs(offsetX) > 10)
+                    {
+                        directionX *= -1;
+                    }
+
+                    if (Math.Abs(offsetY) > 10)
+                    {
+                        directionY *= -1;
+                    }
+
+                    var directions = new List<int> {-1, 1};
+                    var random = new Random();
+                    if ((offsetX == 0) & (offsetY == 0))
+                    {
+                        directionX = directions[random.Next(directions.Count)];
+                        directionY = directions[random.Next(directions.Count)];
+                    }
+
+                    newX = lastUserX + offsetX;
+                    newY = lastUserY + offsetY;
+
+                    textBox2.Text = newX.ToString();
+                    textBox3.Text = newY.ToString();
+
+                    MoveMouse(newX, newY);
                 }
-                if (Math.Abs(offsetY) > 10)
+
+                if (checkLeftClicks.Checked)
                 {
-                    directionY *= -1;
+                    clicksIntrval -= 1;
+                    if (clicksIntrval == 0)
+                    {
+                        clicksIntrval = 100;
+                        LeftClick(X, Y);
+                    }
                 }
-
-                var directions = new List<int> {-1, 1};
-                var random = new Random();
-                if ((offsetX == 0) & (offsetY == 0))
-                {
-                    directionX = directions[random.Next(directions.Count)];
-                    directionY = directions[random.Next(directions.Count)];
-                }
-
-                newX = lastUserX + offsetX;
-                newY = lastUserY + offsetY;
-
-                textBox2.Text = newX.ToString();
-                textBox3.Text = newY.ToString();
-
-                MoveMouse(newX, newY);
             }
         }
     }

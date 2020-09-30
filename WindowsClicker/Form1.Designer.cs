@@ -38,8 +38,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkMoveMouse = new System.Windows.Forms.CheckBox();
+            this.checkLeftClicks = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -121,11 +128,62 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "seconds ago";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.checkLeftClicks);
+            this.groupBox3.Controls.Add(this.checkMoveMouse);
+            this.groupBox3.Location = new System.Drawing.Point(12, 98);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(142, 73);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Options";
+            // 
+            // checkMoveMouse
+            // 
+            this.checkMoveMouse.AutoSize = true;
+            this.checkMoveMouse.Location = new System.Drawing.Point(10, 20);
+            this.checkMoveMouse.Name = "checkMoveMouse";
+            this.checkMoveMouse.Size = new System.Drawing.Size(87, 17);
+            this.checkMoveMouse.TabIndex = 0;
+            this.checkMoveMouse.Text = "Move mouse";
+            this.checkMoveMouse.UseVisualStyleBackColor = true;
+            // 
+            // checkLeftClicks
+            // 
+            this.checkLeftClicks.AutoSize = true;
+            this.checkLeftClicks.Location = new System.Drawing.Point(10, 43);
+            this.checkLeftClicks.Name = "checkLeftClicks";
+            this.checkLeftClicks.Size = new System.Drawing.Size(103, 17);
+            this.checkLeftClicks.TabIndex = 1;
+            this.checkLeftClicks.Text = "Issue Left Clicks";
+            this.checkLeftClicks.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Location = new System.Drawing.Point(170, 98);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(118, 73);
+            this.groupBox4.TabIndex = 6;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Click countdown";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(7, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 103);
+            this.ClientSize = new System.Drawing.Size(300, 195);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -137,6 +195,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -151,6 +213,11 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox checkLeftClicks;
+        private System.Windows.Forms.CheckBox checkMoveMouse;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
